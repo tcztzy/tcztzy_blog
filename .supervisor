@@ -1,0 +1,7 @@
+# This file should be placed in /etc/supervisor/conf.d/
+[program:blog]
+command = /webapps/tcztzy_blog/tcztzy_blog/gunicorn_start
+user = blog
+stdout_logfile = /webapps/tcztzy_blog/logs/gunicorn_supervisor.log
+redirect_stderr = true
+environment=LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8
