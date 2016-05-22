@@ -4,29 +4,29 @@ NAME="tcztzy_blog"
 PROJECT_DIR=/webapps/tcztzy_blog/tcztzy_blog
 ACTIVATE_FILE=/webapps/tcztzy_blog/bin/activate
 SOCK_FILE=/webapps/tcztzy_blog/run/gunicorn.sock
-RUN_DIR=$(dirname $SOCK_FILE)
+RUN_DIR=$(dirname ${SOCK_FILE})
 USER=blog
 GROUP=webapps
 NUM_WORKERS=3
-PROJECT_SETTINGS_MODULE=tcztzy_blog.settings
+PROJECT_SETTINGS_MODULE=tcztzy_blog.settings.production
 PROJECT_WSGI_MODULE=tcztzy_blog.wsgi
 
 echo "Starting $NAME as `whoami`"
 
 
-source $ACTIVATE_FILE
-cd $PROJECT_DIR
-export DJANGO_SETTINGS_MODULE=$PROJECT_SETTINGS_MODULE
-export PYTHONPATH=$PROJECT_DIR:$PYTHONPATH
+source ${ACTIVATE_FILE}
+cd ${PROJECT_DIR}
+export DJANGO_SETTINGS_MODULE=${PROJECT_SETTINGS_MODULE}
+export PYTHONPATH=${PROJECT_DIR}:${PYTHONPATH}
 
-test -d $RUN_DIR || mkdir -p $RUNDIR
+test -d ${RUN_DIR} || mkdir -p ${RUN_DIR}
 
 
 
 exec /webapps/tcztzy_blog/bin/gunicorn ${PROJECT_WSGI_MODULE}:application \
-     --name $NAME \
-     --workers $NUM_WORKERS \
-     --user=$USER --group=$GROUP \
-     --bind=unix:$SOCK_FILE \
+     --name ${NAME} \
+     --workers ${NUM_WORKERS} \
+     --user=${USER} --group=${GROUP} \
+     --bind=unix:${SOCK_FILE} \
      --log-level=debug \
      --log-file=-
