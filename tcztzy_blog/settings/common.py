@@ -1,10 +1,27 @@
 # -*- coding: utf-8 -*-
 """Base Setting Module for Blog"""
+import json
 import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Utilities
+PROJECT_PACKAGE = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('BLOG_SECRET_KEY')
+# The full path to the repository root.
+BASE_DIR = PROJECT_PACKAGE.parent
+
+data_dir_key = 'BLOG_DATA_DIR'
+DATA_DIR = Path(os.environ[data_dir_key]) if data_dir_key in os.environ else BASE_DIR.parent
+
+try:
+    with DATA_DIR.joinpath('conf', 'secrets.json').open() as handle:
+        SECRETS = json.load(handle)
+except IOError:
+    SECRETS = {
+        'secret_key': 'a',
+    }
+
+SECRET_KEY = str(SECRETS['secret_key'])
 
 ALLOWED_HOSTS = []
 
@@ -33,7 +50,7 @@ ROOT_URLCONF = 'tcztzy_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [str(PROJECT_PACKAGE.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -51,7 +68,7 @@ WSGI_APPLICATION = 'tcztzy_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': str(BASE_DIR.joinpath('db.sqlite3')),
     }
 }
 

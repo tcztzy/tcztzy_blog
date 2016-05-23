@@ -6,4 +6,4 @@ DEBUG = True
 
 ALLOWED_HOSTS.append('localhost')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (str(PROJECT_PACKAGE.joinpath('static')),)
