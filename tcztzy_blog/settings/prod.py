@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Production Setting Module"""
-from tcztzy_blog.settings.base import *  # noqa
+from tcztzy_blog.settings.common import *  # noqa
 
 DEBUG = False
 

@@ -8,7 +8,7 @@ RUN_DIR=$(dirname ${SOCK_FILE})
 USER=blog
 GROUP=webapps
 NUM_WORKERS=3
-PROJECT_SETTINGS_MODULE=tcztzy_blog.settings.production
+PROJECT_SETTINGS_MODULE=tcztzy_blog.settings.prod
 PROJECT_WSGI_MODULE=tcztzy_blog.wsgi
 
 echo "Starting $NAME as `whoami`"
