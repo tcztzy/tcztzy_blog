@@ -1,11 +1,20 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 
 class Entry(models.Model):
     headline = models.CharField(max_length=200)
     slug = models.SlugField(unique_for_date='pub_date')
+    is_active = models.BooleanField(
+        help_text=_(
+            "Tick to make this entry live (see also the publication date). "
+            "Note that administrators (like yourself) are allowed to preview "
+            "inactive entries whereas the general public aren't."
+        ),
+        default=False,
+    )
     author = models.CharField(max_length=100)
     pub_date = models.DateTimeField(
         verbose_name=_("Publication date"),
@@ -25,6 +34,13 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.headline
+
+    def is_published(self):
+        """
+        Return True if the entry is publicly accessible.
+        """
+        return self.is_active and self.pub_date <= timezone.now()
+    is_published.boolean = True
 
     def save(self, *args, **kwargs):
 

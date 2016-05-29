@@ -1,5 +1,6 @@
 from django.conf.urls import url
+from blog.views import BlogArchiveIndexView
 
 urlpatterns = [
-    url('^$', lambda: None, 'None'),
+    url('^$', BlogArchiveIndexView.as_view(), name='None'),
 ]
