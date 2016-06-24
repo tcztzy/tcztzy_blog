@@ -177,5 +177,11 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static "js/ie10-viewport-bug-workaround.js" %}"></script>
+    <script>
+      $(".blog-nav-item").click(function () {
+        $(".blog-nav-item.active").removeClass("active");
+        $(this).addClass("active");
+      })
+    </script>
   </body>
 </html>
