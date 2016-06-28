@@ -10,6 +10,7 @@ class BlogViewMixin(object):
 
     date_field = 'pub_date'
     paginate_by = 10
+    allow_empty = True
 
     def get_allow_future(self):
         return self.request.user.is_staff

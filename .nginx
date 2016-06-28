@@ -18,11 +18,11 @@ server {
     error_log /webapps/tcztzy_blog/logs/nginx-error.log;
  
     location /static/ {
-        alias   /webapps/tcztzy_blog/tcztzy_blog/static/;
+        alias   /webapps/tcztzy_blog/tcztzy_blog/tcztzy_blog/static/;
     }
     
     location /media/ {
-        alias   /webapps/tcztzy_blog/tcztzy_blog/media/;
+        alias   /webapps/tcztzy_blog/tcztzy_blog/tcztzy_blog/media/;
     }
 
     location / {
