@@ -4,6 +4,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 
+class EntryQuerySet(models.QuerySet):
+    def published(self):
+        return self.active().filter(pub_date__lte=timezone.now())
+
+    def active(self):
+        return self.filter(is_active=True)
+
+
 class Entry(models.Model):
     headline = models.CharField(max_length=200)
     slug = models.SlugField(unique_for_date='pub_date')
@@ -25,6 +33,8 @@ class Entry(models.Model):
     )
     summary = models.TextField()
     body = models.TextField()
+
+    objects = EntryQuerySet.as_manager()
 
     class Meta:
         db_table = 'blog_entries'
