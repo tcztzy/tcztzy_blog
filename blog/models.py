@@ -31,7 +31,7 @@ class Entry(models.Model):
             "publication date must be in the past."
         ),
     )
-    summary = models.TextField()
+    summary = models.TextField(blank=True, null=True)
     body = models.TextField()
 
     objects = EntryQuerySet.as_manager()

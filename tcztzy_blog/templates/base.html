@@ -43,7 +43,7 @@
         <div class="col-sm-8 blog-main">
           {% for entry in latest %}<div class="blog-post">
             <h2 class="blog-post-title">{{ entry.headline }}</h2>
-            <p class="blog-post-meta">{{ entry.pub_date }} by <a href="#">Mark</a></p>
+            <p class="blog-post-meta">{{ entry.pub_date }} by <a href="#">{{ entry.author }}</a></p>
             {{ entry.body }}
           </div><!-- /.blog-post -->{% endfor %}
           {% include 'blog/blog_pageination.html' %}
