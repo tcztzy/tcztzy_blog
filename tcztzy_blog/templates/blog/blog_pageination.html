@@ -1,6 +1,8 @@
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
+{% if is_paginated %}
+<nav>
+  <ul class="pager">
+    <li><a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}{% endif %}">Previous</a></li>
+    <li><a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Next</a></li>
+  </ul>
+</nav>
+{% endif %}

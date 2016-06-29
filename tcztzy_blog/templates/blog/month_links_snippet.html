@@ -1,0 +1,14 @@
+{% load i18n %}
+{% regroup dates by year as dates_by_year %}
+
+<div class="sidebar-module">
+  <h4>Archives</h4>
+  <ol class="list-unstyled">
+  {% for month in dates_by_year %}
+    <li><a href="{% url 'blog:archive-year' month.grouper %}"><h4>{{ month.grouper }}</h4></a></li>
+    {% for d in month.list %}
+    <li><a href="{% language "en" %}{% url 'blog:archive-month' d|date:"Y" d|date:"b" %}{% endlanguage %}">{{ d|date:"F Y" }}</a></li>
+    {% endfor %}
+  {% endfor %}
+  </ol>
+</div>
